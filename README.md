@@ -1,7 +1,7 @@
 # CS467 Project 1 Implementation - UIUC Subreddit Scraping
 Project Members:
 - Anami Patel
-- Jamie Rollinson
+- Jamie Rollison
 - Melanie Seay
 - Upanshu Parekh
 

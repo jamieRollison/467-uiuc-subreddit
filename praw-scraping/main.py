@@ -15,12 +15,13 @@ def clean_str(s: str):
     return rv
 
 def sentiment_analysis(post_title, post_text):
+    # find sentiment of the post title and text body (considers emoticons and letter case used)
     title_sentiment = SentimentIntensityAnalyzer().polarity_scores(post_title)['compound']
     text_sentiment = SentimentIntensityAnalyzer().polarity_scores(post_text)['compound']
     overall_sentiment = 0.0
     if (post_text != ""):
         overall_sentiment = (0.3 * title_sentiment) + (0.7 * text_sentiment)
-    else:
+    else:        # body text is empty
         overall_sentiment = title_sentiment
 
     return overall_sentiment

@@ -1,15 +1,13 @@
 import csv
-import praw
-# import init
+import init
 import string
 import re
 from datetime import datetime
 
 import nltk
 from nltk.sentiment.util import *
-from nltk.sentiment import SentimentAnalyzer
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
-# nltk.download()
+nltk.download("vader_lexicon")
 
 def clean_str(s: str):
     rv = s.translate(str.maketrans('', '', string.punctuation))
@@ -17,19 +15,18 @@ def clean_str(s: str):
     return rv
 
 def sentiment_analysis(post_title, post_text):
-    title_sentiment = SentimentIntensityAnalyzer().polarity_scores(post_title)
-    text_sentiment = SentimentIntensityAnalyzer().polarity_scores(post_text)
+    title_sentiment = SentimentIntensityAnalyzer().polarity_scores(post_title)['compound']
+    text_sentiment = SentimentIntensityAnalyzer().polarity_scores(post_text)['compound']
     overall_sentiment = 0.0
     if (post_text != ""):
-        overall_sentiment = (0.3 * title_sentiment + 0.7 * text_sentiment)
+        overall_sentiment = (0.3 * title_sentiment) + (0.7 * text_sentiment)
     else:
         overall_sentiment = title_sentiment
 
     return overall_sentiment
 
 def main():
-    # reddit = init.reddit
-    reddit = praw.Reddit(client_id = "gpspKeTA03Ec2985-pk3aw", client_secret = "Qab1gVmMUsxoDrD3kY9EFaK7gfYSjw", user_agent = "Ok-Objective-984")
+    reddit = init.reddit
     rUIUC = reddit.subreddit("UIUC")
 
     writer = csv.writer(open("uiuc_top_all.csv", "w"))
@@ -58,4 +55,3 @@ def main():
 
 if __name__ == "__main__":
     exit(main())
-

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css">
+  <title>Popular Posts on the UIUC Subreddit</title>
+</head>
+<body>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <script src="data.js"></script>
+  <script src="index.js"></script>
+  <div class="flex-container">
+    <svg height="600px" width="1000px"></svg>
+    <h1>Popular Topics on r/UIUC by year</h1>
+    <div style="display: flex; flex-direction: row;">
+      <p>Correlated with a negative sentiment</p>
+      <div id="gradient"></div>
+      <p>Correlated with a positive sentiment</p>
+    </div>
+  </div>
+</body>
+</html>

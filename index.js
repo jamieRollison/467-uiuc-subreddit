@@ -7,6 +7,7 @@
  * complain.  This delays drawing until the entire DOM has loaded.
  */
 window.addEventListener("load", drawGraph);
+let midpoint = 0;
 
 function drawGraph() {
   // d3 has been added to the html in a <script> tag so referencing it here should work.
@@ -25,6 +26,11 @@ function drawGraph() {
     .domain(data.map((d) => d.year));
 
   console.log(colorBand.length);
+
+  midpoint = d3.quantile(
+    data.map((d) => d.sentiment),
+    0.5
+  );
 
   const y = d3
     .scaleLinear()
@@ -55,7 +61,12 @@ function drawGraph() {
     .attr("text-anchor", "middle")
     .text((d) => d.words)
     .style("font-size", (d) => size(d.rank) + "px")
-    .style("fill", (d) => color(d.sentiment));
+    .style("fill", (d) => color(d.sentiment))
+    .on("click", function (event) {
+      d3.select(this);
+      const d = event.target.__data__;
+      showModal(d);
+    });
 
   svg
     .append("g")
@@ -69,4 +80,38 @@ function drawGraph() {
     .style("background", `linear-gradient(to right, ${colorBand.join(", ")})`);
 
   // ...
+}
+
+function showModal(topic) {
+  console.log(topic);
+  const modal = document.getElementById("modal");
+  console.log(modal);
+
+  const header = document.getElementById("modal-title");
+  header.textContent = topic.words;
+
+  const backButton = document.getElementById("hide-modal");
+  backButton.onclick = function () {
+    modal.style.visibility = "hidden";
+    modal.style.width = "0";
+  };
+
+  const modalContent = document.getElementById("modal-content");
+  modalContent.innerHTML = `
+    <h4>${topic.year}</h4>
+    <p>Posts about this topic tend to have a ${
+      topic.sentiment < midpoint
+        ? '<em style="color:red;">negative</em>'
+        : '<em style="color:blue;">positive</em>'
+    } sentiment.</p>
+
+    <ul>
+    ${posts[topic.words]
+      .map((post) => `<li><a href=${post.url}>${post.title}</a></li>`)
+      .join("")}
+    </ul>
+  `;
+
+  modal.style.width = "300px";
+  modal.style.visibility = "visible";
 }

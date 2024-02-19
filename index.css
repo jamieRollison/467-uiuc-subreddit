@@ -7,8 +7,28 @@
 
 #gradient {
   width: 100%;
-  margin-top: 30px;
+  margin-top: 25px;
   margin-left: 10px;
   margin-right: 10px;
   height: 20px;
+}
+
+html {
+  background-color: #101010;
+  color: white;
+}
+
+#modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 100%;
+  background-color: #f1f1f1;
+  color: black;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  transition: 0.5s;
+  visibility: hidden;
 }

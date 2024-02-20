@@ -5,4 +5,4 @@ Project Members:
 - Melanie Seay
 - Upanshu Parekh
 
-There's nothing else here. Have a cookie! 🍪
+Just open `index.html` in a web browser.

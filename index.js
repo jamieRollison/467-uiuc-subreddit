@@ -27,10 +27,8 @@ function drawGraph() {
 
   console.log(colorBand.length);
 
-  midpoint = d3.quantile(
-    data.map((d) => d.sentiment),
-    0.5
-  );
+  midpoint = d3.mean(data.map((d) => d.sentiment));
+  console.log("Median value: ", midpoint);
 
   const y = d3
     .scaleLinear()
@@ -62,6 +60,7 @@ function drawGraph() {
     .text((d) => d.words)
     .style("font-size", (d) => size(d.rank) + "px")
     .style("fill", (d) => color(d.sentiment))
+    .style("cursor", "pointer")
     .on("click", function (event) {
       d3.select(this);
       const d = event.target.__data__;
@@ -95,6 +94,7 @@ function showModal(topic) {
     modal.style.visibility = "hidden";
     modal.style.width = "0";
   };
+  backButton.style.cursor = "pointer";
 
   const modalContent = document.getElementById("modal-content");
   modalContent.innerHTML = `

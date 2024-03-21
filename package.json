@@ -1,0 +1,19 @@
+{
+  "name": "uiuc-implementation",
+  "version": "1.0.0",
+  "description": "Topics by year on the UIUC subreddit.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamieRollison/467-uiuc-subreddit.git"
+  },
+  "author": "Jamie Rollison, Upanshu Parekh, Anami Patel, Melanie Seay",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jamieRollison/467-uiuc-subreddit/issues"
+  },
+  "homepage": "https://github.com/jamieRollison/467-uiuc-subreddit#readme"
+}
